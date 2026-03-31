@@ -19,7 +19,13 @@ public class Main {
             String choose = console.nextLine();
             switch (choose) {
                 case "ls":
-                    NoteManager.loadNotes();
+                    NoteManager.printNotes(notes);
+                    continue;
+                case "add":
+                    String text = console.nextLine();
+
+                    NoteManager.add(new Note(text, LocalDateTime.now().toString()));
+                    continue;
             }
             if (choose.equals("exit")) break;
         } console.close();

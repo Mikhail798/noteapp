@@ -22,7 +22,7 @@ public class NoteManager {
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT id, text, created_at FROM notes ORDER BY created_at")) {
+             ResultSet rs = stmt.executeQuery("SELECT text, created_at FROM notes")) {
 
             while (rs.next()) {
                 String text = rs.getString("text");
@@ -36,5 +36,35 @@ public class NoteManager {
         }
 
         return notes;
+    }
+
+    public static void printNotes(List<Note> notes) {
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT id, text, created_at FROM notes ORDER BY created_at")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String text = rs.getString("text");
+                String createdAt = rs.getString("created_at");
+
+                System.out.printf("(%d) |%s| : %s\n", id, createdAt, text);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void add(Note note) {
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO notes (text, created_at) VALUES (?, NOW())")) {
+
+            stmt.setString(1, note.getText());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
