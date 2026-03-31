@@ -22,11 +22,32 @@ public class Main {
                     NoteManager.printNotes(notes);
                     continue;
                 case "add":
+                    System.out.println("Введите название новой заметки: ");
+
                     String text = console.nextLine();
+
                     NoteManager.add(new Note(text, LocalDateTime.now().toString()));
+
+                    System.out.println("Заметка успешно добавлена");
                     continue;
                 case "del":
+                    System.out.println("Введите айди заметки, которую хотите удалить: ");
+
                     NoteManager.delete(console);
+
+                    System.out.println("Заметка успешно удалена");
+                    continue;
+                case "delAll":
+                    NoteManager.deleteAll();
+
+                    System.out.println("Заметки успешно удалены");
+                    continue;
+                case "upd":
+                    System.out.println("Введите айди заметки имя, которой хотите обновить: ");
+
+                    NoteManager.update(console);
+
+                    System.out.println("Заметка обновлена");
                     continue;
             }
             if (choose.equals("exit")) break;
