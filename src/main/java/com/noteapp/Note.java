@@ -8,7 +8,7 @@ public class Note {
 
     public Note(String text, String createdAt) {
         this.text = text;
-        this.createdAt = createdAt;
+        this.createdAt = null;
     }
 
     public String getText() {
