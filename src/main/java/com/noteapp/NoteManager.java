@@ -67,4 +67,16 @@ public class NoteManager {
             e.printStackTrace();
         }
     }
+
+    public static void delete(Scanner console) {
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM notes WHERE id = ?")) {
+
+            stmt.setInt(1, console.nextInt());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

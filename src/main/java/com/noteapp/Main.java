@@ -23,8 +23,10 @@ public class Main {
                     continue;
                 case "add":
                     String text = console.nextLine();
-
                     NoteManager.add(new Note(text, LocalDateTime.now().toString()));
+                    continue;
+                case "del":
+                    NoteManager.delete(console);
                     continue;
             }
             if (choose.equals("exit")) break;
